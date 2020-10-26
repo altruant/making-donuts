@@ -11,6 +11,10 @@ django-mysql = "*"
 django-rest-framework = "*"
 django-rest-auth = "*"
 django-allauth = "*"
+gunicorn = "*"
+whitenoise = "*"
+dj-database-url = "*"
+psycopg2-binary = "~=2.8.6"
 
 [requires]
 python_version = "3.8"
