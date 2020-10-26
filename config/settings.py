@@ -25,7 +25,9 @@ SECRET_KEY = os.environ['SECRET_KEY']
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '127.0.0.1',
+]
 
 
 # Application definition
@@ -50,6 +52,7 @@ INSTALLED_APPS = [
 
     #local:
     'accounts.apps.AccountsConfig',
+    'frontend.apps.FrontendConfig',
 ]
 
 MIDDLEWARE = [
@@ -131,4 +134,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+REACT_APP_DIR = os.path.join(BASE_DIR, 'frontend/static')
+STATICFILES_DIRS = ( os.path.join(BASE_DIR, 'frontend/static/build/static'), )
 AUTH_USER_MODEL = 'accounts.User'
