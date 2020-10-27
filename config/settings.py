@@ -45,7 +45,6 @@ INSTALLED_APPS = [
     'django.contrib.sites',
 
     #3rd party:
-    'django_mysql',
     'rest_framework',
     'rest_framework.authtoken',
     'rest_auth',
@@ -56,7 +55,19 @@ INSTALLED_APPS = [
     #local:
     'accounts.apps.AccountsConfig',
     'frontend.apps.FrontendConfig',
+    'recipes.apps.RecipesConfig',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        # 'rest_framework.permissions.AllowAny',
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+    ]
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -147,4 +158,15 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 REACT_APP_DIR = os.path.join(BASE_DIR, 'frontend/static')
 STATICFILES_DIRS = ( os.path.join(BASE_DIR, 'frontend/static/build/static'), )
+
+
+# Substituting a custom User model
+# https://docs.djangoproject.com/en/3.1/topics/auth/customizing/#substituting-a-custom-user-model
+
 AUTH_USER_MODEL = 'accounts.User'
+
+# https://docs.djangoproject.com/en/3.0/ref/settings/#std:setting-SITE_ID
+SITE_ID = 1
+
+# https://docs.djangoproject.com/en/3.0/ref/settings/#email-backend
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
